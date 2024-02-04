@@ -1,6 +1,7 @@
 //----------Variables----------\\
-let cards = document.querySelectorAll("button");
+//let cards = document.querySelectorAll("button");
 
+/*
 let buttons = document.getElementsBy.getElementsByTagName("button");
 
 //----------Functions----------\\
@@ -22,7 +23,19 @@ function shuffle(array) {
   return array;
 }
 
-function flipCard() {
+/*function flipCard() {
   this.classList.toggle("flip");
 }
 cards.forEach((flipCard) => flipCard.addEventListener("click", flipCard));
+*/
+
+
+
+// I added this for the cards
+var cards = document.querySelectorAll('.card');
+
+[...cards].forEach((card)=>{
+  card.addEventListener( 'click', function() {
+    card.classList.toggle('is-flipped');
+  });
+});
