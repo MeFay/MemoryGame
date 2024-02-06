@@ -88,8 +88,10 @@ body {
 
 .card_front {
   background-position: center;
-  background-image: url("Images/cardBack.webp");
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
+  object-fit: cover
+  
 }
 
 .card_back {
