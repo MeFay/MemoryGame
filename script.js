@@ -28,6 +28,22 @@ function shuffle(array) {
 
 images = shuffle(images);
 let cards = document.querySelectorAll(".card");
+
+let cardsC = [];
+cardsC = images.map((image, index) => {
+  return {
+    id: `card${index + 1}`,
+    name: image,
+    isFlipped: false,
+    isMatch: false,
+    canClick: true,
+  };
+});
+console.log(cardsC);
+
+
+
+
 cards.forEach((card, index) => {
   let cardFront = card.querySelector(".card_front");
   cardFront.style.backgroundImage = `url(${images[index]})`;
@@ -39,60 +55,49 @@ let card2 = null;
 cards.forEach((card, index) => {
   card.addEventListener("click", function () {
     if (
-      !cards[index].canClick ||
-      cards[index].isFlipped ||
-      cards[index].isMatch
+      !cardsC[index].canClick ||
+      cardsC[index].isFlipped ||
+      cardsC[index].isMatch
     ) {
       // Se a carta não pode ser clicada, já está virada ou já foi encontrada como par, não fazer nada
       return;
     }
 
     card.classList.toggle("is-flipped");
-    cards[index].isFlipped = true;
+    cardsC[index].isFlipped = true;
     if (!card1) {
-      card1 = card;
+      card1 = cardsC[index];
       console.log(card1);
     } else if (!card2) {
-      card2 = card;
+      card2 = cardsC[index];
       console.log(card2);
     }
-    checkMatch();
+
+    if (card1.id == card2.id) {
+      checkMatch();
+    }
   });
 });
 
-cards = images.map((image, index) => {
-  return {
-    id: `card${index + 1}`,
-    nome: image,
-    isFlipped: false,
-    isMatch: false,
-    canClick: true,
-  };
-});
-console.log(cards);
 
 function checkMatch() {
-  if (card1 && card2) {
-    if (card1.id == card2.id) {
-      card1.isMatch = true;
-      card2.isMatch = true;
-      card1.canClick = false;
-      card2.canClick = false;
-      card1.style.backgroundImage = `url(${images[card1.id - 1]})`;
-      card2.style.backgroundImage = `url(${images[card2.id - 1]})`;
-      card1 = null;
-      card2 = null;
-      console.log("match");
-    } else {
-      // Se as cartas não formam um par, vire-as de volta após um curto intervalo
-      setTimeout(function () {
-        card1.classList.remove("is-flipped");
-        card2.classList.remove("is-flipped");
-        card1.isFlipped = false;
-        card2.isFlipped = false;
-      }, 1000);
-    }
-    // Limpar as referências para as cartas
+  if (card1.name === card2.name) {
+    card1.isMatch = true;
+    card2.isMatch = true;
+    card1.canClick = false;
+    card2.canClick = false;
+    card1.style.backgroundImage = `url(${images[card1.id - 1]})`;
+    card2.style.backgroundImage = `url(${images[card2.id - 1]})`;
+    card1 = null;
+    card2 = null;
+    console.log("match");
+  } else {
+    card1.classList.remove("is-flipped");
+    card2.classList.remove("is-flipped");
+    card1.isFlipped = false;
+    card2.isFlipped = false;
+    card1.canClick = true;
+    card2.canClick = true;
     card1 = null;
     card2 = null;
   }
