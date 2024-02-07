@@ -41,9 +41,6 @@ cardsC = images.map((image, index) => {
 });
 console.log(cardsC);
 
-
-
-
 cards.forEach((card, index) => {
   let cardFront = card.querySelector(".card_front");
   cardFront.style.backgroundImage = `url(${images[index]})`;
@@ -73,12 +70,10 @@ cards.forEach((card, index) => {
       console.log(card2);
     }
 
-    if (card1.id == card2.id) {
-      checkMatch();
-    }
+    console.log(card1.name, card2.name);
+    checkMatch();
   });
 });
-
 
 function checkMatch() {
   if (card1.name === card2.name) {
@@ -86,19 +81,14 @@ function checkMatch() {
     card2.isMatch = true;
     card1.canClick = false;
     card2.canClick = false;
-    card1.style.backgroundImage = `url(${images[card1.id - 1]})`;
-    card2.style.backgroundImage = `url(${images[card2.id - 1]})`;
-    card1 = null;
-    card2 = null;
     console.log("match");
   } else {
-    card1.classList.remove("is-flipped");
-    card2.classList.remove("is-flipped");
     card1.isFlipped = false;
     card2.isFlipped = false;
     card1.canClick = true;
     card2.canClick = true;
-    card1 = null;
-    card2 = null;
   }
+  card1 = null;
+  card2 = null;
+  console.log("match");
 }
