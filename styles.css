@@ -39,6 +39,7 @@ body {
   justify-content: center;
   width: 55vw;
   height: 70vh;
+  row-gap:35px;
 }
 
 .row {
@@ -73,6 +74,7 @@ body {
   transform-style: preserve-3d;
   transform-origin: center right;
   transition: transform 1s;
+  
 }
 
 .card.is-flipped {
@@ -90,8 +92,7 @@ body {
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
-  object-fit: cover
-  
+  object-fit: cover;
 }
 
 .card_back {
