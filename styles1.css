@@ -1,0 +1,83 @@
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
+
+:root {
+  --main-color: black;
+  --main-color2: #ffffff;
+  --main-color3: #ffc040;
+  --box-shadow-color: #fad517;
+  --btn-color: #fad517;
+  --player1-color: #7bfffb;
+  --player2-color: #6f2dbd;
+}
+
+html,
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 36px;
+  background-color: var(--main-color);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  min-height: 100vh;
+  width: 100vw;
+}
+
+
+#c1, #c2, #c3{
+  width: 33%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#c1 {
+  width: 33%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+#c2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#start {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+span {
+  color: var(--main-color2);
+  font-size: 70px;
+  margin-bottom: 40px;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px var(--box-shadow-color);
+  display: flex;
+}
+
+#startBtn {
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  width: 100%;
+  transition: 0.3s;
+  transition-duration: 0.4s;
+}
+
+#startBtn:hover {
+  color: var(--main-color3);
+  transform: scale(1.25);
+}
