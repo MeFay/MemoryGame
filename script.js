@@ -41,16 +41,13 @@ cardsC = images.map((image, index) => {
 });
 console.log(cardsC);
 
-
-
-
 cards.forEach((card, index) => {
   let cardFront = card.querySelector(".card_front");
   cardFront.style.backgroundImage = `url(${images[index]})`;
 });
 
-let card1 = null;
-let card2 = null;
+let firstCard = {};
+let secondCard = {};
 // Add event listener to each card
 cards.forEach((card, index) => {
   card.addEventListener("click", function () {
@@ -59,46 +56,40 @@ cards.forEach((card, index) => {
       cardsC[index].isFlipped ||
       cardsC[index].isMatch
     ) {
-      // Se a carta não pode ser clicada, já está virada ou já foi encontrada como par, não fazer nada
       return;
     }
 
     card.classList.toggle("is-flipped");
     cardsC[index].isFlipped = true;
-    if (!card1) {
-      card1 = cardsC[index];
-      console.log(card1);
-    } else if (!card2) {
-      card2 = cardsC[index];
-      console.log(card2);
+    if (!firstCard) {
+      firstCard = cardsC[index];
+      console.log(firstCard);
+    } else if (!secondCard) {
+      secondCard = cardsC[index];
+      console.log(secondCard);
     }
 
-    if (card1.id == card2.id) {
+    if (firstCard.name == secondCard.name) {
       checkMatch();
+    } else{
+      if(firstCard.isFlipped)
+      card.classList.toggle("is-flipped");
+      if(secondCard.isFlipped)
+      card.classList.toggle("is-flipped");
     }
   });
 });
 
 
 function checkMatch() {
-  if (card1.name === card2.name) {
-    card1.isMatch = true;
-    card2.isMatch = true;
-    card1.canClick = false;
-    card2.canClick = false;
-    card1.style.backgroundImage = `url(${images[card1.id - 1]})`;
-    card2.style.backgroundImage = `url(${images[card2.id - 1]})`;
-    card1 = null;
-    card2 = null;
+  if (firstCard.name === secondCard.name) {
+    firstCard.isMatch = true;
+    secondCard.isMatch = true;
+    firstCard.canClick = false;
+    secondCard.canClick = false;
+    firstCard = null;
+    secondCard = null;
     console.log("match");
-  } else {
-    card1.classList.remove("is-flipped");
-    card2.classList.remove("is-flipped");
-    card1.isFlipped = false;
-    card2.isFlipped = false;
-    card1.canClick = true;
-    card2.canClick = true;
-    card1 = null;
-    card2 = null;
-  }
+  } 
+  
 }
