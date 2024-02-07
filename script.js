@@ -46,9 +46,10 @@ cards.forEach((card, index) => {
   cardFront.style.backgroundImage = `url(${images[index]})`;
 });
 
-let card1 = null;
-let card2 = null;
+let firstCard = {};
+let secondCard = {};
 // Add event listener to each card
+/*
 cards.forEach((card, index) => {
   card.addEventListener("click", function () {
     if (
@@ -56,12 +57,11 @@ cards.forEach((card, index) => {
       cardsC[index].isFlipped ||
       cardsC[index].isMatch
     ) {
-      // Se a carta não pode ser clicada, já está virada ou já foi encontrada como par, não fazer nada
       return;
     }
-
     card.classList.toggle("is-flipped");
     cardsC[index].isFlipped = true;
+
     if (!card1) {
       card1 = cardsC[index];
       console.log(card1);
@@ -74,21 +74,56 @@ cards.forEach((card, index) => {
     checkMatch();
   });
 });
+*/
+
+function flipCard(card) {
+  card.classList.toggle("is-flipped");
+}
+
+cards.forEach((card, index) => {
+  card.addEventListener("click", function () {
+    if (
+      !cardsC[index].canClick ||
+      cardsC[index].isFlipped ||
+      cardsC[index].isMatch
+    ) {
+      return;
+    }
+
+    flipCard(card);
+
+    cardsC[index].isFlipped = true;
+
+    if (!firstCard.name) { // Verifica se firstCard não tem um nome
+      firstCard = cardsC[index];
+      console.log(firstCard);
+      console.log(firstCard.id)
+    } else if (!secondCard.name) { // Verifica se secondCard não tem um nome
+      secondCard = cardsC[index];
+      console.log(secondCard);
+      console.log(firstCard.id)
+    }
+
+    console.log(firstCard.name, secondCard.name);
+    checkMatch();
+  });
+});
 
 function checkMatch() {
-  if (card1.name === card2.name) {
-    card1.isMatch = true;
-    card2.isMatch = true;
-    card1.canClick = false;
-    card2.canClick = false;
+  if (firstCard.name === secondCard.name) {
+    firstCard.isMatch = true;
+    secondCard.isMatch = true;
+    firstCard.canClick = false;
+    secondCard.canClick = false;
     console.log("match");
   } else {
-    card1.isFlipped = false;
-    card2.isFlipped = false;
-    card1.canClick = true;
-    card2.canClick = true;
+    setTimeout(() => {
+      flipCard(document.getElementById(images.getElementById(firstCard.id)));
+      flipCard(document.getElementById(images.getElementById(firstCard.id)));
+      console.log("not match");
+    }, 1000); // Ajuste o tempo de atraso conforme necessário
   }
-  card1 = null;
-  card2 = null;
-  console.log("match");
+
+  firstCard = {};
+  secondCard = {};
 }
