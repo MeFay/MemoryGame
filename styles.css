@@ -80,6 +80,9 @@ body {
 .card.is-flipped {
   transform: translateX(-100%) rotateY(-180deg);
 }
+.card.reverse {
+  transform: translateX(100%) rotateY(180deg);
+}
 
 .card_face {
   position: absolute;

@@ -12,6 +12,7 @@ let images = [
 ];
 
 images = images.concat(images);
+
 function shuffle(array) {
   var currentIndex = array.length,
     temporaryValue,
@@ -51,45 +52,44 @@ let secondCard = {};
 // Add event listener to each card
 cards.forEach((card, index) => {
   card.addEventListener("click", function () {
+    console.log("aqui")
     if (
-      !cardsC[index].canClick ||
-      cardsC[index].isFlipped ||
-      cardsC[index].isMatch
+      !card.canClick ||
+      card.isFlipped ||
+      card.isMatch
     ) {
       return;
     }
 
     card.classList.toggle("is-flipped");
-    cardsC[index].isFlipped = true;
+    card.isFlipped = true;
+
+    console.log(firstCard)
+
     if (!firstCard) {
-      firstCard = cardsC[index];
+      firstCard = card;
       console.log(firstCard);
-    } else if (!secondCard) {
-      secondCard = cardsC[index];
+    } else {
+      secondCard = card;
       console.log(secondCard);
     }
 
-    if (firstCard.name == secondCard.name) {
+    if (firstCard.name === secondCard.name) {
+      console.log(firstCard, secondCard);
       checkMatch();
-    } else{
-      if(firstCard.isFlipped)
-      card.classList.toggle("is-flipped");
-      if(secondCard.isFlipped)
-      card.classList.toggle("is-flipped");
+    } else {
+      if (firstCard.isFlipped) card.classList.toggle("reverse");
+      if (secondCard.isFlipped) card.classList.toggle("reverse");
     }
   });
 });
 
-
 function checkMatch() {
-  if (firstCard.name === secondCard.name) {
-    firstCard.isMatch = true;
-    secondCard.isMatch = true;
-    firstCard.canClick = false;
-    secondCard.canClick = false;
-    firstCard = null;
-    secondCard = null;
-    console.log("match");
-  } 
-  
+  firstCard.isMatch = true;
+  secondCard.isMatch = true;
+  firstCard.canClick = false;
+  secondCard.canClick = false;
+  firstCard = {};
+  secondCard = {};
+  console.log("match");
 }
