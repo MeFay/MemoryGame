@@ -1,64 +1,99 @@
-let images = ['Images/BarMinder.png', 'Images/BatMinder.png', 'Images/CowMinder.png', 'Images/FuzzyMinder.png', 'Images/AutumnMinder.png', 'Images/Bigodes.png', 'Images/MinderGamer.png', 'Images/FemaleMinder.png', 'Images/GentlemanMinder.png', 'Images/MinderBiker.png'];
+let images = [
+  "Images/BarMinder.png",
+  "Images/BatMinder.png",
+  "Images/CowMinder.png",
+  "Images/FuzzyMinder.png",
+  "Images/AutumnMinder.png",
+  "Images/Bigodes.png",
+  "Images/MinderGamer.png",
+  "Images/FemaleMinder.png",
+  "Images/GentlemanMinder.png",
+  "Images/MinderBiker.png",
+];
 
-// Duplicate the array
 images = images.concat(images);
-
-// Function to shuffle array
 function shuffle(array) {
-  var currentIndex = array.length, temporaryValue, randomIndex;
-
-  // While there remain elements to shuffle...
+  var currentIndex = array.length,
+    temporaryValue,
+    randomIndex;
   while (0 !== currentIndex) {
-
-    // Pick a remaining element...
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex -= 1;
-
-    // And swap it with the current element.
     temporaryValue = array[currentIndex];
     array[currentIndex] = array[randomIndex];
     array[randomIndex] = temporaryValue;
   }
-
   return array;
 }
 
-// Shuffle images
 images = shuffle(images);
-
-// Now you can assign each image from the shuffled array to a card
-let cards = document.querySelectorAll('.card');
+let cards = document.querySelectorAll(".card");
 cards.forEach((card, index) => {
-  // Here you can assign the image to the card
-  // For example, if you're using a div with a background image, you could do:
-  let cardFront = card.querySelector('.card_front');
+  let cardFront = card.querySelector(".card_front");
   cardFront.style.backgroundImage = `url(${images[index]})`;
 });
 
+let card1 = null;
+let card2 = null;
 // Add event listener to each card
-cards.forEach((card) => {
-  card.addEventListener('click', function() {
-    card.classList.toggle('is-flipped');
+cards.forEach((card, index) => {
+  card.addEventListener("click", function () {
+    if (
+      !cards[index].canClick ||
+      cards[index].isFlipped ||
+      cards[index].isMatch
+    ) {
+      // Se a carta não pode ser clicada, já está virada ou já foi encontrada como par, não fazer nada
+      return;
+    }
+
+    card.classList.toggle("is-flipped");
+    cards[index].isFlipped = true;
+    if (!card1) {
+      card1 = card;
+      console.log(card1);
+    } else if (!card2) {
+      card2 = card;
+      console.log(card2);
+    }
+    checkMatch();
   });
 });
 
+cards = images.map((image, index) => {
+  return {
+    id: `card${index + 1}`,
+    nome: image,
+    isFlipped: false,
+    isMatch: false,
+    canClick: true,
+  };
+});
+console.log(cards);
 
-/*
-//-------------------this--------------------------
-var cardFront = document.querySelector('.card-front');
-function shuffle(cardFront) {
-  let currentIndex = cardFront.length,
-    temporaryValue,
-    randomIndex;
-
-  while (0 !== currentIndex) {
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-    
-    temporaryValue = cardFront[currentIndex];
-    cardFront[currentIndex] = cardFront[randomIndex];
-    cardFront[randomIndex] = temporaryValue;
+function checkMatch() {
+  if (card1 && card2) {
+    if (card1.id == card2.id) {
+      card1.isMatch = true;
+      card2.isMatch = true;
+      card1.canClick = false;
+      card2.canClick = false;
+      card1.style.backgroundImage = `url(${images[card1.id - 1]})`;
+      card2.style.backgroundImage = `url(${images[card2.id - 1]})`;
+      card1 = null;
+      card2 = null;
+      console.log("match");
+    } else {
+      // Se as cartas não formam um par, vire-as de volta após um curto intervalo
+      setTimeout(function () {
+        card1.classList.remove("is-flipped");
+        card2.classList.remove("is-flipped");
+        card1.isFlipped = false;
+        card2.isFlipped = false;
+      }, 1000);
+    }
+    // Limpar as referências para as cartas
+    card1 = null;
+    card2 = null;
   }
-
-  return cardFront;
-}*/
+}
