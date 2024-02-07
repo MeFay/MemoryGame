@@ -54,7 +54,7 @@ cards.forEach((card, index) => {
   card.addEventListener("click", function () {
     console.log("aqui")
     if (
-      !card.canClick ||
+      card.canClick ===false||
       card.isFlipped ||
       card.isMatch
     ) {
