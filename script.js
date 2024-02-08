@@ -125,7 +125,7 @@ function renderBoard() {
     scene.addEventListener("click", () => handleCardClick(i, card));
   }
 }
-
+/*
 let arraySelection = [];
 
 function handleCardClick(index, card) {
@@ -152,6 +152,8 @@ function handleCardClick(index, card) {
 
 function checkMatch(card1, card2) {
   if (card1.id === card2.id) {
+    card1.classList.add('matched');
+    card2.classList.add('matched');
     console.log("match");
     return true;
   } else {
@@ -160,4 +162,51 @@ function checkMatch(card1, card2) {
   }
 }
 
+renderBoard();
+*/
+
+let arraySelection = [];
+let domSelection = [];
+
+function handleCardClick(index, card) {
+  let currentCard = cardsObjct[index];
+  if (card.classList.contains("is-flipped")) {
+    card.classList.remove("is-flipped");
+    card.querySelector(
+      ".card_front"
+    ).style.backgroundImage = `url(${currentCard.imageFront})`;
+
+    arraySelection.push(currentCard);
+    domSelection.push(card);
+    console.log(arraySelection[0]);
+    console.log(arraySelection[1]);
+    if (arraySelection.length == 2) {
+      checkMatch(arraySelection[0], arraySelection[1], domSelection[0], domSelection[1]);
+      arraySelection = [];
+      domSelection = [];
+    }
+  } else {
+    card.classList.add("is-flipped");
+    card.querySelector(".card_front").style.backgroundImage = "none";
+  }
+}
+
+function checkMatch(card1, card2, domCard1, domCard2) {
+  if (card1.id === card2.id) {
+    console.log("match");
+    card1.classList.add('matched');
+    card2.classList.add('matched');
+    domCard1.classList.add('matched');
+    domCard2.classList.add('matched');
+    return true;
+  } else {
+    console.log("no match");
+    setTimeout(() => {
+      domCard1.classList.add('is-flipped');
+    domCard2.classList.add('is-flipped');
+    }, 1000);
+    
+    return false;
+  }
+}
 renderBoard();
