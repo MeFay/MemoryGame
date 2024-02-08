@@ -164,6 +164,8 @@ function checkMatch(card1, card2, domCard1, domCard2) {
     domCard2.classList.add('matched');
     domCard1.style.pointerEvents = "none";
     domCard2.style.pointerEvents = "none";
+    console.log(domCard1);
+    console.log(domCard2);
     max--;
     return true;
   } else {
@@ -187,11 +189,12 @@ renderBoard();
 
 document.getElementById("restartBtn").addEventListener("click", restartGame);
 function restartGame() {
-  /*
+  
   cardsObjct = shuffle(cardsObjct);
   arraySelection = [];
   domSelection = [];
   renderBoard();
-  */
-  location.reload();
+  max = 10;
+  
+  //location.reload();
 }
