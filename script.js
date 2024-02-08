@@ -130,6 +130,11 @@ let arraySelection = [];
 let domSelection = [];
 
 function handleCardClick(index, card) {
+
+  if (card.classList.contains("matched")) {
+    return;
+  }
+
   let currentCard = cardsObjct[index];
   if (card.classList.contains("is-flipped")) {
     card.classList.remove("is-flipped");
@@ -139,8 +144,6 @@ function handleCardClick(index, card) {
 
     arraySelection.push(currentCard);
     domSelection.push(card);
-    console.log(arraySelection[0]);
-    console.log(arraySelection[1]);
     if (arraySelection.length == 2) {
       checkMatch(arraySelection[0], arraySelection[1], domSelection[0], domSelection[1]);
       arraySelection = [];
@@ -157,13 +160,15 @@ let max = 10;
 
 function checkMatch(card1, card2, domCard1, domCard2) {
   if (card1.id === card2.id) {
-    console.log("match");
     domCard1.classList.add('matched');
     domCard2.classList.add('matched');
+    domCard1.style.pointerEvents = "none";
+    domCard2.style.pointerEvents = "none";
+    console.log(domCard1);
+    console.log(domCard2);
     max--;
     return true;
   } else {
-    console.log("no match");
     setTimeout(() => {
       domCard1.classList.add('is-flipped');
       domCard2.classList.add('is-flipped');
@@ -178,13 +183,18 @@ function done() {
     setTimeout(() => {
       alert("Parabéns, você acertou!");
     }, 1000);
-    
   }
 };
 renderBoard();
 
 document.getElementById("restartBtn").addEventListener("click", restartGame);
 function restartGame() {
+  
   cardsObjct = shuffle(cardsObjct);
+  arraySelection = [];
+  domSelection = [];
   renderBoard();
+  max = 10;
+  
+  //location.reload();
 }
