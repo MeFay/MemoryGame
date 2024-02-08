@@ -10,8 +10,6 @@
   --main-color3: #ffc040;
   --box-shadow-color: #fad517;
   --btn-color: #fad517;
-  --player1-color: #7bfffb;
-  --player2-color: #6f2dbd;
 }
 
 html,
@@ -28,7 +26,7 @@ body {
 
 
 #c1, #c2, #c3{
-  width: 33%;
+  width: 34%;
   height: 100%;
   display: flex;
   flex-direction: column;
