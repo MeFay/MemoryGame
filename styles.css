@@ -10,8 +10,7 @@
   --main-color3: #ffc040;
   --box-shadow-color: #fad517;
   --btn-color: #fad517;
-  --player1-color: #7bfffb;
-  --player2-color: #6f2dbd;
+  --main-dark-mode: #0d1b2a;
 }
 
 html,
@@ -26,6 +25,11 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  width: 100vw;
+}
+
+body.light-mode {
+  background-color: var(--main-color2);
 }
 
 #game {
@@ -39,7 +43,12 @@ body {
   justify-content: center;
   width: 55vw;
   height: 70vh;
-  row-gap:35px;
+  row-gap: 35px;
+}
+
+body.light-mode #game {
+  background-color: var(--main-dark-mode);
+  box-shadow: 0 0 15px var(--box-shadow-color);
 }
 
 .row {
@@ -49,6 +58,10 @@ body {
   align-items: center;
   width: 100%;
   height: 100%;
+}
+
+body.light-mode .row {
+  background-color: var(--main-dark-mode);
 }
 
 .scene {
@@ -74,7 +87,6 @@ body {
   transform-style: preserve-3d;
   transform-origin: center right;
   transition: transform 1s;
-  
 }
 
 .card.is-flipped {
@@ -131,6 +143,28 @@ body {
   color: var(--main-color3);
 }
 
+body.light-mode #restartBtn:hover {
+  background-color: var(--main-dark-mode);
+  color: var(--main-color2);
+}
+
+#lottie-animation {
+  width: 100px;
+  height: 100px;
+}
+
+#darkLight {
+  border: none;
+  background-color: var(--main-color);
+  display: flex;
+  align-self: end;
+}
+
+body.light-mode #darkLight {
+  border: none;
+  background-color:var(--main-color2);
+}
+
 .matched {
-  pointer-events: none;
+  background-color: var(--main-color2);
 }
