@@ -126,8 +126,8 @@ function renderBoard() {
   }
 }
 
-let firstCard = null;
-let secondCard = null;
+let arraySelection = [];
+let domSelection = [];
 
 function handleCardClick(index, card) {
   let currentCard = cardsObjct[index];
@@ -137,38 +137,50 @@ function handleCardClick(index, card) {
       ".card_front"
     ).style.backgroundImage = `url(${currentCard.imageFront})`;
 
-    //Ver como adicionar o card ao firstCard ou secondCard
-    
-    if (firstCard === null) {
-      firstCard = currentCard;
-    } else {
-      secondCard = currentCard;
+    arraySelection.push(currentCard);
+    domSelection.push(card);
+    console.log(arraySelection[0]);
+    console.log(arraySelection[1]);
+    if (arraySelection.length == 2) {
+      checkMatch(arraySelection[0], arraySelection[1], domSelection[0], domSelection[1]);
+      arraySelection = [];
+      domSelection = [];
     }
-
-    console.log(firstCard, secondCard);
-    checkMatch(firstCard, secondCard);
   } else {
     card.classList.add("is-flipped");
     card.querySelector(".card_front").style.backgroundImage = "none";
   }
+  done();
 }
 
-function checkMatch(firstCard, secondCard) {
-  if (firstCard.id === secondCard.id) {
+let max = 10;
+
+function checkMatch(card1, card2, domCard1, domCard2) {
+  if (card1.id === card2.id) {
     console.log("match");
-    firstCard = {};
-    secondCard = {};
+    domCard1.classList.add('matched');
+    domCard2.classList.add('matched');
+    max--;
     return true;
   } else {
     console.log("no match");
-    card.classList.add("is-flipped");
-    card.querySelector(".card_front").style.backgroundImage = "none";
-    firstCard = {};
-    secondCard = {};
+    setTimeout(() => {
+      domCard1.classList.add('is-flipped');
+      domCard2.classList.add('is-flipped');
+    }, 1000);
+    
     return false;
   }
 }
 
+function done() {
+  if (max === 0) {
+    setTimeout(() => {
+      alert("Parabéns, você acertou!");
+    }, 1000);
+    
+  }
+};
 renderBoard();
 
 document.getElementById("restartBtn").addEventListener("click", restartGame);
