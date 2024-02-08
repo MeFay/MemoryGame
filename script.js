@@ -138,3 +138,9 @@ function handleCardClick(index, card) {
 }
 
 renderBoard();
+
+document.getElementById("restartBtn").addEventListener("click", restartGame);
+function restartGame() {
+  cardsObjct = shuffle(cardsObjct);
+  renderBoard();
+}
