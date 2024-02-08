@@ -80,32 +80,6 @@ let cardsObjct = [
   },
 ];
 
-let easyCards = cardsObjct.slice(0, 8);
-let mediumCards = cardsObjct.slice(0, 16);
-let hardCards = cardsObjct;
-
-function startGame(difficulty) {
-  let cards;
-  if (difficulty === "Easy") {
-    cards = shuffle(easyCards);
-  } else if (difficulty === "Medium") {
-  } else if (difficulty === "Hard") {
-  }
-  renderBoard();
-}
-
-document.getElementById("Easy").addEventListener("click", function () {
-  startGame("Easy");
-});
-
-document.getElementById("Medium").addEventListener("click", function () {
-  startGame("Medium");
-});
-
-document.getElementById("Hard").addEventListener("click", function () {
-  startGame("Hard");
-});
-
 cardsObjct = cardsObjct.concat(cardsObjct);
 
 function shuffle(array) {

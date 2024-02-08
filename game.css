@@ -18,18 +18,27 @@ body {
   font-family: "Roboto", sans-serif;
   font-size: 36px;
   background-color: var(--main-color);
-  margin: 0;
-  padding: 0;
-  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 0;
+  padding: 0;
+  display: flex;
   min-height: 100vh;
   width: 100vw;
 }
 
 body.light-mode {
   background-color: var(--main-color2);
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+  width: 100%;
 }
 
 #game {
@@ -129,21 +138,16 @@ body.light-mode .row {
   color: var(--main-color2);
   box-shadow: 0 0 15px var(--box-shadow-color);
   font-size: 30px;
-  margin-top: 30px;
   border: none;
   border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 30px 40px;
+  margin-top: 30px;
   width: 100%;
   transition: 0.3s;
   cursor: pointer;
-}
-
-#restartBtn:hover {
-  background-color: var(--main-color2);
-  color: var(--main-color3);
 }
 
 body.light-mode #restartBtn:hover {
@@ -151,14 +155,39 @@ body.light-mode #restartBtn:hover {
   color: var(--main-color2);
 }
 
+#homeBtn {
+  background-color: var(--main-color3);
+  color: var(--main-color2);
+  box-shadow: 0 0 15px var(--box-shadow-color);
+  font-size: 30px;
+  border: none;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: end;
+  padding: 10px 10px;
+  margin-left: 20px;
+  width: 100%;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+#homeBtn:hover,
+#restartBtn:hover {
+  background-color: var(--main-color2);
+  color: var(--main-color3);
+}
+
+
 #lottie-animation {
   width: 100px;
   height: 100px;
 }
 
 #darkLight {
-  border: none;
   background-color: var(--main-color);
+  border: none;
   display: flex;
   align-self: end;
   cursor: pointer;
@@ -167,7 +196,7 @@ body.light-mode #restartBtn:hover {
 
 body.light-mode #darkLight {
   border: none;
-  background-color:var(--main-color2);
+  background-color: var(--main-color2);
 }
 
 .matched {
