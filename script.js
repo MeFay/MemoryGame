@@ -79,7 +79,7 @@ let cardsObjct = [
 cardsObjct = cardsObjct.concat(cardsObjct);
 
 function shuffle(array) {
-  var currentIndex = array.length,
+  let currentIndex = array.length,
     temporaryValue,
     randomIndex;
   while (0 !== currentIndex) {
@@ -126,14 +126,46 @@ function renderBoard() {
   }
 }
 
+let firstCard = null;
+let secondCard = null;
+
 function handleCardClick(index, card) {
   let currentCard = cardsObjct[index];
   if (card.classList.contains("is-flipped")) {
     card.classList.remove("is-flipped");
-    card.querySelector(".card_front").style.backgroundImage = `url(${currentCard.imageFront})`;
+    card.querySelector(
+      ".card_front"
+    ).style.backgroundImage = `url(${currentCard.imageFront})`;
+
+    //Ver como adicionar o card ao firstCard ou secondCard
+    
+    if (firstCard === null) {
+      firstCard = currentCard;
+    } else {
+      secondCard = currentCard;
+    }
+
+    console.log(firstCard, secondCard);
+    checkMatch(firstCard, secondCard);
   } else {
     card.classList.add("is-flipped");
     card.querySelector(".card_front").style.backgroundImage = "none";
+  }
+}
+
+function checkMatch(firstCard, secondCard) {
+  if (firstCard.id === secondCard.id) {
+    console.log("match");
+    firstCard = {};
+    secondCard = {};
+    return true;
+  } else {
+    console.log("no match");
+    card.classList.add("is-flipped");
+    card.querySelector(".card_front").style.backgroundImage = "none";
+    firstCard = {};
+    secondCard = {};
+    return false;
   }
 }
 
