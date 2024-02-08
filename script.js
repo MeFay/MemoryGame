@@ -187,8 +187,11 @@ renderBoard();
 
 document.getElementById("restartBtn").addEventListener("click", restartGame);
 function restartGame() {
+  /*
   cardsObjct = shuffle(cardsObjct);
   arraySelection = [];
   domSelection = [];
   renderBoard();
+  */
+  location.reload();
 }
