@@ -126,8 +126,7 @@ function renderBoard() {
   }
 }
 
-let firstCard = null;
-let secondCard = null;
+let arraySelection = [];
 
 function handleCardClick(index, card) {
   let currentCard = cardsObjct[index];
@@ -138,33 +137,25 @@ function handleCardClick(index, card) {
     ).style.backgroundImage = `url(${currentCard.imageFront})`;
 
     //Ver como adicionar o card ao firstCard ou secondCard
-    
-    if (firstCard === null) {
-      firstCard = currentCard;
-    } else {
-      secondCard = currentCard;
+    arraySelection.push(currentCard);
+    console.log(arraySelection[0]);
+    console.log(arraySelection[1]);
+    if (arraySelection.length == 2) {
+      checkMatch(arraySelection[0], arraySelection[1]);
+      arraySelection = [];
     }
-
-    console.log(firstCard, secondCard);
-    checkMatch(firstCard, secondCard);
   } else {
     card.classList.add("is-flipped");
     card.querySelector(".card_front").style.backgroundImage = "none";
   }
 }
 
-function checkMatch(firstCard, secondCard) {
-  if (firstCard.id === secondCard.id) {
+function checkMatch(card1, card2) {
+  if (card1.id === card2.id) {
     console.log("match");
-    firstCard = {};
-    secondCard = {};
     return true;
   } else {
     console.log("no match");
-    card.classList.add("is-flipped");
-    card.querySelector(".card_front").style.backgroundImage = "none";
-    firstCard = {};
-    secondCard = {};
     return false;
   }
 }
