@@ -132,6 +132,7 @@ let arraySelection = [];
 let domSelection = [];
 
 function handleCardClick(index, card) {
+  document.getElementById("points").innerHTML = maxPoints;
   if (card.classList.contains("matched")) {
     return;
   }
@@ -163,6 +164,7 @@ function handleCardClick(index, card) {
 }
 
 let maxPairs = 10;
+let maxPoints = 0;
 
 function checkMatch(card1, card2, domCard1, domCard2) {
   if (card1.id === card2.id) {
@@ -170,16 +172,15 @@ function checkMatch(card1, card2, domCard1, domCard2) {
     domCard2.classList.add("matched");
     domCard1.style.pointerEvents = "none";
     domCard2.style.pointerEvents = "none";
-    console.log(domCard1);
-    console.log(domCard2);
     maxPairs--;
+    maxPoints += 20;
     return true;
   } else {
     setTimeout(() => {
       domCard1.classList.add("is-flipped");
       domCard2.classList.add("is-flipped");
     }, 1000);
-
+    maxPoints -= 5;
     return false;
   }
 }
@@ -187,7 +188,7 @@ function checkMatch(card1, card2, domCard1, domCard2) {
 function done() {
   if (maxPairs === 0) {
     setTimeout(() => {
-      alert("Parabéns, você acertou!");
+      alert("Parabéns! Acabou com "+maxPoints+" pontos!");
     }, 1000);
   }
 }
