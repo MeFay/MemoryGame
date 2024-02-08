@@ -214,7 +214,10 @@ function checkMatch(card1, card2, domCard1, domCard2) {
 
 function done() {
   if (max === 0) {
-    alert("Parabéns, você acertou!");
+    setTimeout(() => {
+      alert("Parabéns, você acertou!");
+    }, 1000);
+    
   }
 };
 renderBoard();
