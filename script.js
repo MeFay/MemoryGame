@@ -160,7 +160,7 @@ function handleCardClick(index, card) {
   done();
 }
 
-let max = 10;
+let maxPairs = 10;
 
 function checkMatch(card1, card2, domCard1, domCard2) {
   if (card1.id === card2.id) {
@@ -170,7 +170,7 @@ function checkMatch(card1, card2, domCard1, domCard2) {
     domCard2.style.pointerEvents = "none";
     console.log(domCard1);
     console.log(domCard2);
-    max--;
+    maxPairs--;
     return true;
   } else {
     setTimeout(() => {
@@ -183,7 +183,7 @@ function checkMatch(card1, card2, domCard1, domCard2) {
 }
 
 function done() {
-  if (max === 0) {
+  if (maxPairs === 0) {
     setTimeout(() => {
       alert("Parabéns, você acertou!");
     }, 1000);
@@ -198,7 +198,7 @@ function restartGame() {
   arraySelection = [];
   domSelection = [];
   renderBoard();
-  max = 10;
+  maxPairs = 10;
   
   //location.reload();
 }
