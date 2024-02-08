@@ -125,45 +125,6 @@ function renderBoard() {
     scene.addEventListener("click", () => handleCardClick(i, card));
   }
 }
-/*
-let arraySelection = [];
-
-function handleCardClick(index, card) {
-  let currentCard = cardsObjct[index];
-  if (card.classList.contains("is-flipped")) {
-    card.classList.remove("is-flipped");
-    card.querySelector(
-      ".card_front"
-    ).style.backgroundImage = `url(${currentCard.imageFront})`;
-
-    //Ver como adicionar o card ao firstCard ou secondCard
-    arraySelection.push(currentCard);
-    console.log(arraySelection[0]);
-    console.log(arraySelection[1]);
-    if (arraySelection.length == 2) {
-      checkMatch(arraySelection[0], arraySelection[1]);
-      arraySelection = [];
-    }
-  } else {
-    card.classList.add("is-flipped");
-    card.querySelector(".card_front").style.backgroundImage = "none";
-  }
-}
-
-function checkMatch(card1, card2) {
-  if (card1.id === card2.id) {
-    card1.classList.add('matched');
-    card2.classList.add('matched');
-    console.log("match");
-    return true;
-  } else {
-    console.log("no match");
-    return false;
-  }
-}
-
-renderBoard();
-*/
 
 let arraySelection = [];
 let domSelection = [];
@@ -221,3 +182,9 @@ function done() {
   }
 };
 renderBoard();
+
+document.getElementById("restartBtn").addEventListener("click", restartGame);
+function restartGame() {
+  cardsObjct = shuffle(cardsObjct);
+  renderBoard();
+}
