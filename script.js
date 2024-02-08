@@ -13,6 +13,10 @@ let images = [
 ];
 images = images.concat(images);
 
+document.getElementById('darkLight').addEventListener('click', function() {
+  document.body.classList.toggle('light-mode');
+});
+
 let cardsObjct = [
   {
     id: 1,
