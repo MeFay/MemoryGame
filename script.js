@@ -201,5 +201,6 @@ function restartGame() {
   domSelection = [];
   renderBoard();
   max = 10;
+  document.getElementById("points").innerHTML = 0;
   //location.reload();
 }
