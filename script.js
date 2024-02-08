@@ -13,8 +13,8 @@ let images = [
 ];
 images = images.concat(images);
 
-document.getElementById('darkLight').addEventListener('click', function() {
-  document.body.classList.toggle('light-mode');
+document.getElementById("darkLight").addEventListener("click", function () {
+  document.body.classList.toggle("light-mode");
 });
 
 let cardsObjct = [
@@ -80,6 +80,32 @@ let cardsObjct = [
   },
 ];
 
+let easyCards = cardsObjct.slice(0, 8);
+let mediumCards = cardsObjct.slice(0, 16);
+let hardCards = cardsObjct;
+
+function startGame(difficulty) {
+  let cards;
+  if (difficulty === "Easy") {
+    cards = shuffle(easyCards);
+  } else if (difficulty === "Medium") {
+  } else if (difficulty === "Hard") {
+  }
+  renderBoard();
+}
+
+document.getElementById("Easy").addEventListener("click", function () {
+  startGame("Easy");
+});
+
+document.getElementById("Medium").addEventListener("click", function () {
+  startGame("Medium");
+});
+
+document.getElementById("Hard").addEventListener("click", function () {
+  startGame("Hard");
+});
+
 cardsObjct = cardsObjct.concat(cardsObjct);
 
 function shuffle(array) {
@@ -134,7 +160,6 @@ let arraySelection = [];
 let domSelection = [];
 
 function handleCardClick(index, card) {
-
   if (card.classList.contains("matched")) {
     return;
   }
@@ -149,7 +174,12 @@ function handleCardClick(index, card) {
     arraySelection.push(currentCard);
     domSelection.push(card);
     if (arraySelection.length == 2) {
-      checkMatch(arraySelection[0], arraySelection[1], domSelection[0], domSelection[1]);
+      checkMatch(
+        arraySelection[0],
+        arraySelection[1],
+        domSelection[0],
+        domSelection[1]
+      );
       arraySelection = [];
       domSelection = [];
     }
@@ -164,8 +194,8 @@ let maxPairs = 10;
 
 function checkMatch(card1, card2, domCard1, domCard2) {
   if (card1.id === card2.id) {
-    domCard1.classList.add('matched');
-    domCard2.classList.add('matched');
+    domCard1.classList.add("matched");
+    domCard2.classList.add("matched");
     domCard1.style.pointerEvents = "none";
     domCard2.style.pointerEvents = "none";
     console.log(domCard1);
@@ -174,10 +204,10 @@ function checkMatch(card1, card2, domCard1, domCard2) {
     return true;
   } else {
     setTimeout(() => {
-      domCard1.classList.add('is-flipped');
-      domCard2.classList.add('is-flipped');
+      domCard1.classList.add("is-flipped");
+      domCard2.classList.add("is-flipped");
     }, 1000);
-    
+
     return false;
   }
 }
@@ -188,17 +218,15 @@ function done() {
       alert("Parabéns, você acertou!");
     }, 1000);
   }
-};
+}
 renderBoard();
 
 document.getElementById("restartBtn").addEventListener("click", restartGame);
 function restartGame() {
-  
   cardsObjct = shuffle(cardsObjct);
   arraySelection = [];
   domSelection = [];
   renderBoard();
-  maxPairs = 10;
-  
+  max = 10;
   //location.reload();
 }

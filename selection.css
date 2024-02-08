@@ -1,0 +1,103 @@
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
+
+:root {
+  --main-color: black;
+  --main-color2: #ffffff;
+  --main-color3: #ffc040;
+  --box-shadow-color: #fad517;
+  --btn-color: #fad517;
+}
+
+html,
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 36px;
+  background-color: var(--main-color);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  min-height: 100vh;
+  width: 100vw;
+}
+
+#c1,
+#c2,
+#c3 {
+  width: 34%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#c1 {
+  justify-content: flex-start;
+  width: 25%;
+}
+
+#c2 {
+  justify-content: center;
+  align-items: center;
+}
+
+#c3 {
+  justify-content: flex-end;
+  width: 25%;
+}
+
+#difficultyCard {
+  background: var(--main-color2);
+  width: 30%;
+  border-radius: 15px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  box-shadow: 0 0 15px var(--box-shadow-color);
+}
+
+#start {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+span {
+  color: var(--main-color3);
+  font-size: 90px;
+  padding: 25px;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px var(--box-shadow-color);
+  display: flex;
+  justify-content: center;
+}
+
+#difficultyCard button {
+  color: var(--main-color3);
+  flex-direction: column;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+  font-size: 40px;
+  padding: 10px 24px;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  border: none;
+  width: 100%;
+  transition: 0.3s;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+#difficultyCard button:hover {
+  color: var(--btn-color);
+  transform: scale(1.25);
+}
