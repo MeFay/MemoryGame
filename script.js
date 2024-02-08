@@ -1,3 +1,4 @@
+const game = document.getElementById("game");
 let images = [
   "Images/BarMinder.png",
   "Images/BatMinder.png",
@@ -10,8 +11,72 @@ let images = [
   "Images/GentlemanMinder.png",
   "Images/MinderBiker.png",
 ];
-
 images = images.concat(images);
+
+let cardsObjct = [
+  {
+    id: 1,
+    name: "BarMinder",
+    imageFront: "Images/BarMinder.png",
+    imageBack: "Images/cardBack.webp",
+  },
+  {
+    id: 2,
+    name: "BatMinder",
+    imageFront: "Images/BatMinder.png",
+    imageBack: "Images/cardBack.webp",
+  },
+  {
+    id: 3,
+    name: "CowMinder",
+    imageFront: "Images/CowMinder.png",
+    imageBack: "Images/cardBack.webp",
+  },
+  {
+    id: 4,
+    name: "FuzzyMinder",
+    imageFront: "Images/FuzzyMinder.png",
+    imageBack: "Images/cardBack.webp",
+  },
+  {
+    id: 5,
+    name: "AutumnMinder",
+    imageFront: "Images/AutumnMinder.png",
+    imageBack: "Images/cardBack.webp",
+  },
+  {
+    id: 6,
+    name: "Bigodes",
+    imageFront: "Images/Bigodes.png",
+    imageBack: "Images/cardBack.webp",
+  },
+  {
+    id: 7,
+    name: "MinderGamer",
+    imageFront: "Images/MinderGamer.png",
+    imageBack: "Images/cardBack.webp",
+  },
+  {
+    id: 8,
+    name: "FemaleMinder",
+    imageFront: "Images/FemaleMinder.png",
+    imageBack: "Images/cardBack.webp",
+  },
+  {
+    id: 9,
+    name: "GentlemanMinder",
+    imageFront: "Images/GentlemanMinder.png",
+    imageBack: "Images/cardBack.webp",
+  },
+  {
+    id: 10,
+    name: "MinderBiker",
+    imageFront: "Images/MinderBiker.png",
+    imageBack: "Images/cardBack.webp",
+  },
+];
+
+cardsObjct = cardsObjct.concat(cardsObjct);
 
 function shuffle(array) {
   var currentIndex = array.length,
@@ -27,69 +92,49 @@ function shuffle(array) {
   return array;
 }
 
-images = shuffle(images);
-let cards = document.querySelectorAll(".card");
+cardsObjct = shuffle(cardsObjct);
 
-let cardsC = [];
-cardsC = images.map((image, index) => {
-  return {
-    id: `card${index + 1}`,
-    name: image,
-    isFlipped: false,
-    isMatch: false,
-    canClick: true,
-  };
-});
-console.log(cardsC);
+function renderBoard() {
+  game.innerHTML = "";
+  for (let i = 0; i < cardsObjct.length; i++) {
+    const scene = document.createElement("div");
+    scene.classList.add("scene", "scene_card");
 
-cards.forEach((card, index) => {
-  let cardFront = card.querySelector(".card_front");
-  cardFront.style.backgroundImage = `url(${images[index]})`;
-});
+    const card = document.createElement("div");
+    card.classList.add("card", "is-flipped");
 
-let firstCard = {};
-let secondCard = {};
-// Add event listener to each card
-cards.forEach((card, index) => {
-  card.addEventListener("click", function () {
-    console.log("aqui")
-    if (
-      card.canClick ===false||
-      card.isFlipped ||
-      card.isMatch
-    ) {
-      return;
-    }
+    const cardFront = document.createElement("div");
+    cardFront.classList.add("card_face", "card_front");
 
-    card.classList.toggle("is-flipped");
-    card.isFlipped = true;
+    const cardBack = document.createElement("div");
+    cardBack.classList.add("card_face", "card_back");
 
-    console.log(firstCard)
+    card.appendChild(cardFront);
+    card.appendChild(cardBack);
+    scene.appendChild(card);
 
-    if (!firstCard) {
-      firstCard = card;
-      console.log(firstCard);
+    if (i % 5 === 0) {
+      const row = document.createElement("div");
+      row.classList.add("row");
+      row.appendChild(scene);
+      game.appendChild(row);
     } else {
-      secondCard = card;
-      console.log(secondCard);
+      game.lastChild.appendChild(scene);
     }
 
-    if (firstCard.name === secondCard.name) {
-      console.log(firstCard, secondCard);
-      checkMatch();
-    } else {
-      if (firstCard.isFlipped) card.classList.toggle("reverse");
-      if (secondCard.isFlipped) card.classList.toggle("reverse");
-    }
-  });
-});
-
-function checkMatch() {
-  firstCard.isMatch = true;
-  secondCard.isMatch = true;
-  firstCard.canClick = false;
-  secondCard.canClick = false;
-  firstCard = {};
-  secondCard = {};
-  console.log("match");
+    scene.addEventListener("click", () => handleCardClick(i, card));
+  }
 }
+
+function handleCardClick(index, card) {
+  let currentCard = cardsObjct[index];
+  if (card.classList.contains("is-flipped")) {
+    card.classList.remove("is-flipped");
+    card.querySelector(".card_front").style.backgroundImage = `url(${currentCard.imageFront})`;
+  } else {
+    card.classList.add("is-flipped");
+    card.querySelector(".card_front").style.backgroundImage = "none";
+  }
+}
+
+renderBoard();
