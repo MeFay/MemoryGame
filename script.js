@@ -189,24 +189,32 @@ function handleCardClick(index, card) {
     card.classList.add("is-flipped");
     card.querySelector(".card_front").style.backgroundImage = "none";
   }
+  done();
 }
+
+let max = 10;
 
 function checkMatch(card1, card2, domCard1, domCard2) {
   if (card1.id === card2.id) {
     console.log("match");
-    card1.classList.add('matched');
-    card2.classList.add('matched');
     domCard1.classList.add('matched');
     domCard2.classList.add('matched');
+    max--;
     return true;
   } else {
     console.log("no match");
     setTimeout(() => {
       domCard1.classList.add('is-flipped');
-    domCard2.classList.add('is-flipped');
+      domCard2.classList.add('is-flipped');
     }, 1000);
     
     return false;
   }
 }
+
+function done() {
+  if (max === 0) {
+    alert("Parabéns, você acertou!");
+  }
+};
 renderBoard();
