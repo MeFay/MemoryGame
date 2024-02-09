@@ -101,3 +101,11 @@ span {
   color: var(--btn-color);
   transform: scale(1.25);
 }
+
+a{
+  text-decoration: none;
+}
+
+a:hover{
+  text-decoration: none;
+}
