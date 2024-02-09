@@ -179,6 +179,13 @@
     color: var(--main-color3);
   }
   
+  a{
+    text-decoration: none;
+  }
+  
+  a:hover{
+    text-decoration: none;
+  }
   
   #lottie-animation {
     width: 100px;

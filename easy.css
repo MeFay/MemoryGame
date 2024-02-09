@@ -178,7 +178,13 @@ body.light-mode #restartBtn:hover {
   background-color: var(--main-color2);
   color: var(--main-color3);
 }
+a{
+  text-decoration: none;
+}
 
+a:hover{
+  text-decoration: none;
+}
 
 #lottie-animation {
   width: 100px;
