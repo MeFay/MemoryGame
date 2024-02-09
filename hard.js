@@ -81,6 +81,7 @@ let cardsObjct = [
 ];
 
 cardsObjct = cardsObjct.concat(cardsObjct);
+cardsObjct = shuffle(cardsObjct);
 
 function shuffle(array) {
   let currentIndex = array.length,
@@ -95,8 +96,6 @@ function shuffle(array) {
   }
   return array;
 }
-
-cardsObjct = shuffle(cardsObjct);
 
 function renderBoard() {
   game.innerHTML = "";
@@ -134,6 +133,7 @@ let arraySelection = [];
 let domSelection = [];
 
 function handleCardClick(index, card) {
+  document.getElementById("points").innerHTML = maxPoints;
   if (card.classList.contains("matched")) {
     return;
   }
@@ -164,7 +164,8 @@ function handleCardClick(index, card) {
   done();
 }
 
-let max = 10;
+let maxPairs = 10;
+let maxPoints = 0;
 
 function checkMatch(card1, card2, domCard1, domCard2) {
   if (card1.id === card2.id) {
@@ -172,24 +173,23 @@ function checkMatch(card1, card2, domCard1, domCard2) {
     domCard2.classList.add("matched");
     domCard1.style.pointerEvents = "none";
     domCard2.style.pointerEvents = "none";
-    console.log(domCard1);
-    console.log(domCard2);
-    max--;
+    maxPairs--;
+    maxPoints += 20;
     return true;
   } else {
     setTimeout(() => {
       domCard1.classList.add("is-flipped");
       domCard2.classList.add("is-flipped");
     }, 1000);
-
+    maxPoints -= 5;
     return false;
   }
 }
 
 function done() {
-  if (max === 0) {
+  if (maxPairs === 0) {
     setTimeout(() => {
-      alert("Parabéns, você acertou!");
+      alert("Parabéns! Acabou com "+maxPoints+" pontos!");
     }, 1000);
   }
 }
@@ -202,6 +202,6 @@ function restartGame() {
   domSelection = [];
   renderBoard();
   max = 10;
-
+  document.getElementById("points").innerHTML = 0;
   //location.reload();
 }
