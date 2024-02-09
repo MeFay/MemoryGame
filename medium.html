@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="wvalueth=device-wvalueth, initial-scale=1.0"
+    />
+    <link rel="stylesheet" href="medium.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <title>Memory Game</title>
+  </head>
+  <body>
+    <nav>
+      <a href="selection.html">
+        <button id="homeBtn">Home</button>
+      </a>
+      <button id="darkLight">
+        <lottie-player
+          id="lottie-animation"
+          src="https://lottie.host/df0f7fb0-6777-4128-b666-670d62889c9b/T0xdAh4mqb.json"
+          speed=""
+          loop
+          autoplay
+          direction="1"
+          mode="normal"
+        ></lottie-player>
+      </button>
+    </nav>
+
+    <div id="game"></div>
+    <div id="restart">
+      <button id="restartBtn">Restart?</button>
+    </div>
+    <script src="medium.js"></script>
+  </body>
+</html>

@@ -1,0 +1,204 @@
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
+
+:root {
+  --main-color: black;
+  --main-color2: #ffffff;
+  --main-color3: #ffc040;
+  --box-shadow-color: #fad517;
+  --btn-color: #fad517;
+  --main-dark-mode: #0d1b2a;
+}
+
+html,
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 36px;
+  background-color: var(--main-color);
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  min-height: 100vh;
+  width: 100vw;
+}
+
+body.light-mode {
+  background-color: var(--main-color2);
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+#game {
+  background-color: var(--main-color2);
+  color: var(--main-color);
+  box-shadow: 0 0 15px var(--box-shadow-color);
+  border-radius: 10px;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 55vw;
+  height: 25vh;
+  row-gap: 35px;
+  cursor: pointer;
+}
+
+body.light-mode #game {
+  background-color: var(--main-dark-mode);
+  box-shadow: 0 0 15px var(--box-shadow-color);
+}
+
+.row {
+  background-color: var(--main-color2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+body.light-mode .row {
+  background-color: var(--main-dark-mode);
+}
+
+.scene {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  perspective: 600px;
+}
+
+.card {
+  color: var(--main-color2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 6px;
+  border-radius: 5px;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transform-origin: center right;
+  transition: transform 1s;
+  cursor: pointer;
+}
+
+.card.is-flipped {
+  transform: translateX(-100%) rotateY(-180deg);
+}
+.card.reverse {
+  transform: translateX(100%) rotateY(180deg);
+}
+
+.card_face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.card_front {
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  object-fit: cover;
+}
+
+.card_back {
+  background-position: center;
+  background-image: url("Images/cardBack.webp");
+  background-size: cover;
+  transform: rotateY(180deg);
+}
+
+.card:hover {
+  background-color: var(--main-color3);
+  color: var(--main-color2);
+}
+
+#restartBtn {
+  background-color: var(--main-color3);
+  color: var(--main-color2);
+  box-shadow: 0 0 15px var(--box-shadow-color);
+  font-size: 30px;
+  border: none;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 40px;
+  margin-top: 30px;
+  width: 100%;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+body.light-mode #restartBtn:hover {
+  background-color: var(--main-dark-mode);
+  color: var(--main-color2);
+}
+
+#homeBtn {
+  background-color: var(--main-color3);
+  color: var(--main-color2);
+  box-shadow: 0 0 15px var(--box-shadow-color);
+  font-size: 30px;
+  border: none;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: end;
+  padding: 10px 10px;
+  margin-left: 20px;
+  width: 100%;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+#homeBtn:hover,
+#restartBtn:hover {
+  background-color: var(--main-color2);
+  color: var(--main-color3);
+}
+
+
+#lottie-animation {
+  width: 100px;
+  height: 100px;
+}
+
+#darkLight {
+  background-color: var(--main-color);
+  border: none;
+  display: flex;
+  align-self: end;
+  cursor: pointer;
+  transform: scale(1.25);
+}
+
+body.light-mode #darkLight {
+  border: none;
+  background-color: var(--main-color2);
+}
+
+.matched {
+  background-color: var(--main-color2);
+}

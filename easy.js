@@ -2,14 +2,6 @@ const game = document.getElementById("game");
 let images = [
   "Images/BarMinder.png",
   "Images/BatMinder.png",
-  "Images/CowMinder.png",
-  "Images/FuzzyMinder.png",
-  "Images/AutumnMinder.png",
-  "Images/Bigodes.png",
-  "Images/MinderGamer.png",
-  "Images/FemaleMinder.png",
-  "Images/GentlemanMinder.png",
-  "Images/MinderBiker.png",
 ];
 images = images.concat(images);
 
@@ -30,57 +22,9 @@ let cardsObjct = [
     imageFront: "Images/BatMinder.png",
     imageBack: "Images/cardBack.webp",
   },
-  {
-    id: 3,
-    name: "CowMinder",
-    imageFront: "Images/CowMinder.png",
-    imageBack: "Images/cardBack.webp",
-  },
-  {
-    id: 4,
-    name: "FuzzyMinder",
-    imageFront: "Images/FuzzyMinder.png",
-    imageBack: "Images/cardBack.webp",
-  },
-  {
-    id: 5,
-    name: "AutumnMinder",
-    imageFront: "Images/AutumnMinder.png",
-    imageBack: "Images/cardBack.webp",
-  },
-  {
-    id: 6,
-    name: "Bigodes",
-    imageFront: "Images/Bigodes.png",
-    imageBack: "Images/cardBack.webp",
-  },
-  {
-    id: 7,
-    name: "MinderGamer",
-    imageFront: "Images/MinderGamer.png",
-    imageBack: "Images/cardBack.webp",
-  },
-  {
-    id: 8,
-    name: "FemaleMinder",
-    imageFront: "Images/FemaleMinder.png",
-    imageBack: "Images/cardBack.webp",
-  },
-  {
-    id: 9,
-    name: "GentlemanMinder",
-    imageFront: "Images/GentlemanMinder.png",
-    imageBack: "Images/cardBack.webp",
-  },
-  {
-    id: 10,
-    name: "MinderBiker",
-    imageFront: "Images/MinderBiker.png",
-    imageBack: "Images/cardBack.webp",
-  },
 ];
+
 cardsObjct = cardsObjct.concat(cardsObjct);
-cardsObjct = shuffle(cardsObjct);
 
 function shuffle(array) {
   let currentIndex = array.length,
@@ -95,6 +39,8 @@ function shuffle(array) {
   }
   return array;
 }
+
+cardsObjct = shuffle(cardsObjct);
 
 function renderBoard() {
   game.innerHTML = "";
@@ -132,7 +78,6 @@ let arraySelection = [];
 let domSelection = [];
 
 function handleCardClick(index, card) {
-  document.getElementById("points").innerHTML = maxPoints;
   if (card.classList.contains("matched")) {
     return;
   }
@@ -163,8 +108,7 @@ function handleCardClick(index, card) {
   done();
 }
 
-let maxPairs = 10;
-let maxPoints = 0;
+let max = 2;
 
 function checkMatch(card1, card2, domCard1, domCard2) {
   if (card1.id === card2.id) {
@@ -172,23 +116,24 @@ function checkMatch(card1, card2, domCard1, domCard2) {
     domCard2.classList.add("matched");
     domCard1.style.pointerEvents = "none";
     domCard2.style.pointerEvents = "none";
-    maxPairs--;
-    maxPoints += 20;
+    console.log(domCard1);
+    console.log(domCard2);
+    max--;
     return true;
   } else {
     setTimeout(() => {
       domCard1.classList.add("is-flipped");
       domCard2.classList.add("is-flipped");
     }, 1000);
-    maxPoints -= 5;
+
     return false;
   }
 }
 
 function done() {
-  if (maxPairs === 0) {
+  if (max === 0) {
     setTimeout(() => {
-      alert("Parabéns! Acabou com "+maxPoints+" pontos!");
+      alert("Parabéns, você acertou!");
     }, 1000);
   }
 }
@@ -200,7 +145,7 @@ function restartGame() {
   arraySelection = [];
   domSelection = [];
   renderBoard();
-  max = 10;
-  document.getElementById("points").innerHTML = 0;
+  max = 2;
+
   //location.reload();
 }
