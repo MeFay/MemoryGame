@@ -133,7 +133,7 @@ function checkMatch(card1, card2, domCard1, domCard2) {
 function done() {
   if (max === 0) {
     setTimeout(() => {
-      alert("Parabéns, você acertou!");
+      alert("Congrats, you won!");
     }, 1000);
   }
 }

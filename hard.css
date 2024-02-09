@@ -179,6 +179,9 @@ body.light-mode #restartBtn:hover {
   color: var(--main-color3);
 }
 
+#points{
+  color: var(--main-color2);
+}
 
 #lottie-animation {
   width: 100px;
